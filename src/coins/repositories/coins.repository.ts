@@ -41,15 +41,16 @@ export class CoinRepository {
     })
   }
   async firstCoin(coin: string){
-
-    return await this.prisma.coin.findFirst({
-        where:{name: coin}
+    const moeda: CreateCoinDto = await this.prisma.coin.findFirst({
+      where:{name: coin}
     })
+    return moeda.rate;
   }
   async secondCoin(coin: string){
-
-    return await this.prisma.coin.findFirst({
-        where:{name: coin}
+    const rate: CreateCoinDto = await this.prisma.coin.findFirst({
+      where:{name: coin}
     })
+    return rate.rate;
+
   }
 }

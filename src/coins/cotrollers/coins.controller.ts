@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ConvertCoinDto } from '../dto/convert-coin.dto';
 import { CreateCoinDto } from '../dto/create-coin.dto';
 import { UpdateCoinDto } from '../dto/update-coin.dto';
 import { CalculateConvertion } from '../services/calculate-convertion.service';
@@ -8,7 +9,7 @@ import { FindByIdCoinsService } from '../services/findById-coins.service';
 import { RemoveCoinsService } from '../services/remove-coins.service';
 import { UpdateCoinService } from '../services/update-coins.service';
 
-@Controller('coins')
+@Controller('coin')
 export class CoinsController {
   constructor(
       private readonly createCoinsService: CreateCoinsService,
@@ -34,8 +35,8 @@ export class CoinsController {
     return this.findOneCoinService.findOne(+id);
   }
   @Post('/convert')
-  convertCoin(@Body() coin1:string, @Body() coin2:string, @Body() valueToBuyCoin: number){
-    return this.convertCoinService.calculateConvertion(coin1, coin2, valueToBuyCoin)
+  convertCoin(@Body() convertCoinDto :ConvertCoinDto){
+    return this.convertCoinService.calculateConvertion(convertCoinDto)
   }
 
   @Patch(':id')
